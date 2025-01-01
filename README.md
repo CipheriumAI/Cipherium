@@ -1,4 +1,11 @@
-(https://pbs.twimg.com/profile_banners/1874471509227393024/1735743864/1500x500)
+![Cipherium Banner](https://pbs.twimg.com/profile_banners/1874471509227393024/1735743864/1500x500)
+
+# Cipherium
+
+Cipherium decodes blockchain data into actionable insights for a smarter, connected future.
+
+Cipherium decodes complex blockchain data into AI-readable language, empowering agents to generate actionable insights for meme coin trading.
+
 [![python](https://img.shields.io/badge/python-v3-brightgreen.svg)](https://www.python.org/)
 [![Apache 2.0 with Commons Clause](https://img.shields.io/badge/license-Apache%202.0%20Clause-green)](https://www.pybroker.com/en/latest/license.html)
 [![Documentation Status](https://readthedocs.org/projects/pybroker/badge/?version=latest)](https://www.pybroker.com/en/latest/?badge=latest)
@@ -10,9 +17,9 @@
 ## Algorithmic Trading in Python with Machine Learning
 
 Are you looking to enhance your trading strategies with the power of Python and
-machine learning? Then you need to check out **PyBroker**! This Python framework
+machine learning? Then you need to check out **Cipherium**! This Python framework
 is designed for developing algorithmic trading strategies, with a focus on
-strategies that use machine learning. With PyBroker, you can easily create and
+strategies that use machine learning. With Cipherium, you can easily create and
 fine-tune trading rules, build powerful models, and gain valuable insights into
 your strategy’s performance.
 
@@ -26,81 +33,81 @@ your strategy’s performance.
 - Caching of downloaded data, indicators, and models to speed up your development process.
 - Parallelized computations that enable faster performance.
 
-With PyBroker, you'll have all the tools you need to create winning trading
-strategies backed by data and machine learning. Start using PyBroker today and
+With Cipherium, you'll have all the tools you need to create winning trading
+strategies backed by data and machine learning. Start using Cipherium today and
 take your trading to the next level!
 
 ## Installation
 
-PyBroker supports Python 3.9+ on Windows, Mac, and Linux. You can install
-PyBroker using ``pip``:
+Cipherium supports Python 3.9+ on Windows, Mac, and Linux. You can install
+Cipherium using `pip`:
 
 ```bash
-   pip install -U lib-pybroker
+pip install -U lib-pybroker
 ```
 
 Or you can clone the Git repository with:
 
 ```bash
-   git clone https://github.com/edtechre/pybroker
+git clone https://github.com/edtechre/pybroker
 ```
 
 ## A Quick Example
 
-Get a glimpse of what backtesting with PyBroker looks like with these code
+Get a glimpse of what backtesting with Cipherium looks like with these code
 snippets:
 
 **Rule-based Strategy**:
 
 ```python
-   from pybroker import Strategy, YFinance, highest
+from pybroker import Strategy, YFinance, highest
 
-   def exec_fn(ctx):
-      # Get the rolling 10 day high.
-      high_10d = ctx.indicator('high_10d')
-      # Buy on a new 10 day high.
-      if not ctx.long_pos() and high_10d[-1] > high_10d[-2]:
-         ctx.buy_shares = 100
-         # Hold the position for 5 days.
-         ctx.hold_bars = 5
-         # Set a stop loss of 2%.
-         ctx.stop_loss_pct = 2
+def exec_fn(ctx):
+   # Get the rolling 10 day high.
+   high_10d = ctx.indicator('high_10d')
+   # Buy on a new 10 day high.
+   if not ctx.long_pos() and high_10d[-1] > high_10d[-2]:
+      ctx.buy_shares = 100
+      # Hold the position for 5 days.
+      ctx.hold_bars = 5
+      # Set a stop loss of 2%.
+      ctx.stop_loss_pct = 2
 
-   strategy = Strategy(YFinance(), start_date='1/1/2022', end_date='7/1/2022')
-   strategy.add_execution(
-      exec_fn, ['AAPL', 'MSFT'], indicators=highest('high_10d', 'close', period=10))
-   # Run the backtest after 20 days have passed.
-   result = strategy.backtest(warmup=20)
+strategy = Strategy(YFinance(), start_date='1/1/2022', end_date='7/1/2022')
+strategy.add_execution(
+   exec_fn, ['AAPL', 'MSFT'], indicators=highest('high_10d', 'close', period=10))
+# Run the backtest after 20 days have passed.
+result = strategy.backtest(warmup=20)
 ```
 
 **Model-based Strategy**:
 
 ```python
-   import pybroker
-   from pybroker import Alpaca, Strategy
+import pybroker
+from pybroker import Alpaca, Strategy
 
-   def train_fn(train_data, test_data, ticker):
-      # Train the model using indicators stored in train_data.
-      ...
-      return trained_model
+def train_fn(train_data, test_data, ticker):
+   # Train the model using indicators stored in train_data.
+   ...
+   return trained_model
 
-   # Register the model and its training function with PyBroker.
-   my_model = pybroker.model('my_model', train_fn, indicators=[...])
+# Register the model and its training function with PyBroker.
+my_model = pybroker.model('my_model', train_fn, indicators=[...])
 
-   def exec_fn(ctx):
-      preds = ctx.preds('my_model')
-      # Open a long position given my_model's latest prediction.
-      if not ctx.long_pos() and preds[-1] > buy_threshold:
-         ctx.buy_shares = 100
-      # Close the long position given my_model's latest prediction.
-      elif ctx.long_pos() and preds[-1] < sell_threshold:
-         ctx.sell_all_shares()
+def exec_fn(ctx):
+   preds = ctx.preds('my_model')
+   # Open a long position given my_model's latest prediction.
+   if not ctx.long_pos() and preds[-1] > buy_threshold:
+      ctx.buy_shares = 100
+   # Close the long position given my_model's latest prediction.
+   elif ctx.long_pos() and preds[-1] < sell_threshold:
+      ctx.sell_all_shares()
 
-   alpaca = Alpaca(api_key=..., api_secret=...)
-   strategy = Strategy(alpaca, start_date='1/1/2022', end_date='7/1/2022')
-   strategy.add_execution(exec_fn, ['AAPL', 'MSFT'], models=my_model)
-   # Run Walkforward Analysis on 1 minute data using 5 windows with 50/50 train/test data.
-   result = strategy.walkforward(timeframe='1m', windows=5, train_size=0.5)
+alpaca = Alpaca(api_key=..., api_secret=...)
+strategy = Strategy(alpaca, start_date='1/1/2022', end_date='7/1/2022')
+strategy.add_execution(exec_fn, ['AAPL', 'MSFT'], models=my_model)
+# Run Walkforward Analysis on 1 minute data using 5 windows with 50/50 train/test data.
+result = strategy.walkforward(timeframe='1m', windows=5, train_size=0.5)
 ```
 
 ## User Guide
