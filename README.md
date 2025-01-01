@@ -12,7 +12,7 @@ Cipherium decodes complex blockchain data into AI-readable language, empowering 
 [![Package status](https://github.com/edtechre/pybroker/actions/workflows/main.yml/badge.svg?event=push)](https://github.com/edtechre/pybroker/actions)
 [![Downloads](https://static.pepy.tech/badge/lib-pybroker)](https://pepy.tech/project/lib-pybroker)
 [![Github stars](https://img.shields.io/github/stars/edtechre/pybroker?style=social)](https://github.com/edtechre/pybroker/)
-[![Twitter](https://img.shields.io/twitter/follow/libpybroker?style=social)](https://twitter.com/intent/follow?screen_name=cipherium_ai)
+[![Twitter](https://img.shields.io/twitter/follow/cipherium_ai?style=social)](https://twitter.com/intent/follow?screen_name=cipherium_ai)
 
 ## Algorithmic Trading in Python with Machine Learning
 
